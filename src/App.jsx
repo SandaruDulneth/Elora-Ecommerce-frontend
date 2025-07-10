@@ -20,6 +20,7 @@ import RegisterPage from "./Pages/register.jsx";
                                 <Route path="/admin" element={<AdminPage/>}/>
                                 <Route path="/testing" element={<TestPage/>}/>
                                 <Route path="/signup" element={<RegisterPage/>}/>
+                                <Route path='/admin/*' element={<AdminPage/>}/>
                                 <Route path='/*' element={<h1>404 Not Found</h1>}/>
                             </Routes>
                         </div>

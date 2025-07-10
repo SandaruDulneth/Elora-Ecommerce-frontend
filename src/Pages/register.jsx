@@ -12,7 +12,7 @@ export default function RegisterPage() {
 
     async function handleRegister() {
         try {
-            await axios.post(import.meta.env.VITE_BACKEND_URL + "/api/users", {
+            await axios.post( "http://localhost:5000/api/users/", {
                 firstName,
                 lastName,
                 email,
