@@ -90,7 +90,7 @@ const productSchema = mongoose.Schema({
                 price : price,
                 stock : stock,
             }
-            axios.post(import.meta.env.VITE_BACKEND_URL + "/api/products", product , {
+            axios.post("http://localhost:5000/api/products", product , {
                 headers : {
                     "Authorization" : "Bearer "+token
                 }
