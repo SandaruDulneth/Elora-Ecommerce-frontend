@@ -56,7 +56,8 @@ export default function EditProductPage() {
                 price : price,
                 stock : stock,
             }
-            axios.put( "http://localhost:5000/api/products/"+productId, product , {//in here
+            axios.put( "http://localhost:5000/api/products/"+productId, product , {//in here we send the product
+                // id like this to edit the product to backend
                 headers : {
                     "Authorization" : "Bearer "+token
                 }
@@ -76,7 +77,7 @@ export default function EditProductPage() {
             <h1 className="text-3xl font-bold mb-4">Edit Product</h1>
             <input
                 type="text"
-                disabled
+                disabled //we use disabled for deny access to change the product id when edit cus it is messy
                 placeholder="Product ID"
                 className="input input-bordered w-full max-w-xs"
                 value={productId}

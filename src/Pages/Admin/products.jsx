@@ -9,17 +9,23 @@ export default function AdminProductsPage() {
     const [products, setProducts] = useState(sampleProducts);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-    useEffect(() => {
-        if (isLoading == true) {
+
+    //React components re-render all the time, but we only want to fetch data once — when the component first loads (or when isLoading is true).
+    //
+    // This is exactly what useEffect is for:
+    // ➡️ Run side effects after render.
+
+    useEffect(() => {//use effects are use to run one time whne the array is empty [] like that when array have variable then it will depends.
+        if (isLoading === true) {//
             axios
                 .get("http://localhost:5000/api/products")
                 .then((res) => {
                     console.log(res.data);
                     setProducts(res.data);
-                    setIsLoading(false);
+                    setIsLoading(false);//in here after we set the products this loading will false  then this is not loading and set true after deleting
                 });
         }
-    }, [isLoading]);
+    }, [isLoading]);//this is dependency arrya idk im not 100pc sure so this basically do when this varible is true or what ever then the above use state will run whne its true
 
     function deleteProduct(productId) {
         const token = localStorage.getItem("token");
@@ -27,15 +33,14 @@ export default function AdminProductsPage() {
             toast.error("Please login first");
             return;
         }
-        axios
-            .delete("http://localhost:5000/api/products/" + productId, {
+        axios.delete("http://localhost:5000/api/products/" + productId, {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
             })
             .then(() => {
                 toast.success("Product deleted successfully");
-                setIsLoading(true);
+                setIsLoading(true);//then in here we set loading to true then it wel set products according to DB
             })
             .catch((e) => {
                 toast.error(e.response.data.message);

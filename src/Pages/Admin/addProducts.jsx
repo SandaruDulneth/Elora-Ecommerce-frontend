@@ -5,47 +5,7 @@ import mediaUpload from "../../utils/mediaUpload";
 import axios from "axios";
 
 export default function AddProductPage() {
-    /*
 
-const productSchema = mongoose.Schema({
-    productId : {
-        type : String,
-        required : true,
-        unique : true
-    },
-    name : {
-        type : String,
-        required : true
-    },
-    altNames : [
-        {type : String}
-    ],
-    description : {
-        type : String,
-        required : true
-    },
-    images : [
-        {type : String}
-    ],
-    labelledPrice : {
-        type : Number,
-        required : true
-    },
-    price : {
-        type : Number,
-        required : true
-    },
-    stock : {
-        type : Number,
-        required : true
-    },
-    isAvailable : {
-        type : Boolean,
-        required : true,
-        default : true
-    },
-});
-    */
     const [productId, setProductId] = useState("");
     const [name, setName] = useState("");
     const [altNames, setAltNames] = useState("");
