@@ -15,13 +15,11 @@ import RegisterPage from "./Pages/register.jsx";
                             <Toaster position="top-right"></Toaster>
                             {/* <Header/> */}
                             <Routes path="/*">
-                                <Route path="/" element={<HomePage/>}/>
                                 <Route path="/login" element={<LoginPage/>}/>
-                                <Route path="/admin" element={<AdminPage/>}/>
                                 <Route path="/testing" element={<TestPage/>}/>
                                 <Route path="/signup" element={<RegisterPage/>}/>
                                 <Route path='/admin/*' element={<AdminPage/>}/>
-                                <Route path='/*' element={<h1>404 Not Found</h1>}/>
+                                <Route path='/*' element={<HomePage/>}/>
                             </Routes>
                         </div>
                     </BrowserRouter>
