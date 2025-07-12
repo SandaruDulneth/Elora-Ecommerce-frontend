@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Exile&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Exile&family=Playwrite+HU:wght@100..400&display=swap');
+
 @import "tailwindcss";
 
-
-
-
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: "poppins", sans-serif;
+@theme{
+  --color-primary:#FBFBFB;
+  --color-secondary:#393E46;
+  --color-accent:#C5BAFF;
+  --font-normal: 'Figtree', sans-serif;
+  --font-main: 'Playwrite HU' , sans-serif;
+  --font-fancy: 'Exile', sans-serif;
 }
+
+
