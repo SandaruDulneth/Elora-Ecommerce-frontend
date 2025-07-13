@@ -8,7 +8,7 @@ export function getCart() {
     return cart;
 }
 
-export function removeFromCart(productId) {
+export function removeFromCart(productId) {  //for remove button
     let cart = getCart();
 
     const newCart = cart.filter(
@@ -38,7 +38,7 @@ export function addToCart(product, qty) {
         }
     }else{
         const newQty = cart[index].qty + qty;
-        if(newQty<=0){
+        if(newQty<=0){                   //this just remove item when qty gets 0
             removeFromCart(product.productId);
             return;
         }else{
