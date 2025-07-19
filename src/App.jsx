@@ -8,9 +8,6 @@ import TestPage from "./Pages/test.jsx";
 import RegisterPage from "./Pages/register.jsx";
 import {ScrollTrigger,SplitText} from "gsap/all";
 
-// eslint-disable-next-line no-undef
-
-
     function App() {
         return (
                 <>
