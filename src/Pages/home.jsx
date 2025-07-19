@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import Header from "../components/header";
 import ProductPage from "./client/productPage";
@@ -7,6 +7,7 @@ import CartPage from "./client/cart";
 import CheckoutPage from "./client/checkOut";
 
 export default function HomePage() {
+    const navigate = useNavigate();
     // For Pink Hero Section animation
     const { ref: pinkRef, inView: pinkInView } = useInView({
         triggerOnce: true,
@@ -53,14 +54,19 @@ export default function HomePage() {
                                             natural beauty. Shop our vegan, dermatologist-tested makeup
                                             and skincare—where science meets radiance.
                                         </p>
-                                        <button className={`mt-6 px-6 py-3 text-white rounded-full bg-gradient-to-r from-[#3c1053] to-[#ad5389] w-fit
-                        hover:from-[#c76b9b] hover:to-[#5a1a7a] transition-colors duration-500
-                        transition-opacity duration-700 delay-600
-                        ${pinkInView ? "opacity-100" : "opacity-0"}
-                      `}
+                                        <button
+                                            onClick={() => navigate("/products")}
+                                            className={`mt-6 px-6 py-3 text-white rounded-full 
+    bg-gradient-to-r from-[#3c1053] to-[#ad5389] w-fit 
+    hover:from-[#c76b9b] hover:to-[#5a1a7a]
+    transition-colors duration-500 delay-60
+    transition-opacity duration-700 delay-400
+    ${pinkInView ? "opacity-100" : "opacity-0"}
+  `}
                                         >
                                             Shop Now
                                         </button>
+
                                     </div>
                                 </section>
 
