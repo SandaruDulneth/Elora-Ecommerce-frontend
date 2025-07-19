@@ -15,10 +15,13 @@ export default function HomePage() {
                     <Route path="/" element={
                         <div className="h-screen w-full overflow-y-auto snap-y snap-mandatory">
                             {/* First full-screen image */}
-                            <div className="h-screen w-full bg-gradient-to-r from-[#fffcdc] to-[#d9a7c7] snap-start flex items-center justify-center">
-                               <div className="w-full md:w-1/2 flex flex-col justify-center">
+                            <div className="h-screen w-full bg-gradient-to-r from-[#fffcdc] to-[#d9a7c7] snap-start flex ">
+                               <div className="w-full md:w-1/2 p-8 flex flex-col mt-50 ml-5">
                                    <h1 className="font-normal text-7xl font-bold">Cosmetics that <br/> </h1>
-                                   <p>Everyone lovers!</p>
+                                   <p className="font-normal text-3xl text-gray-700 ">Everyone lovers!</p>
+                                   <button className=" w-1/4 bg-pink-700 m-6 rounded-full p-2 text-white font-light font-bold text-1xl">
+                                       Shop Now
+                                   </button>
                                </div>
                             </div>
 
