@@ -5,6 +5,7 @@ import ProductPage from "./client/productPage";
 import ProductOverviewPage from "./client/productOverview";
 import CartPage from "./client/cart";
 import CheckoutPage from "./client/checkOut";
+import AboutPage from "./client/aboutUs.jsx";
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -77,12 +78,12 @@ export default function HomePage() {
                                 >
                                     <h2
                                         className={`text-5xl font-bold mb-6 transition-all duration-700 ease-in-out
-                      ${
+                                        ${   
                                             purpleInView
                                                 ? "opacity-100 translate-y-0"
                                                 : "opacity-0 translate-y-10"
                                         }
-                    `}
+                                                   `}
                                     >
                                         Discover Our Exclusive Collection
                                     </h2>
@@ -102,7 +103,7 @@ export default function HomePage() {
 
                     {/* Other routes */}
                     <Route path="/products" element={<ProductPage />} />
-                    <Route path="/about" element={<h1>About</h1>} />
+                    <Route path="/about" element={<AboutPage/>} />
                     <Route path="/contact" element={<h1>Contact</h1>} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
