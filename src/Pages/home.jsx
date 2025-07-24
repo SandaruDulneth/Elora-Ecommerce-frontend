@@ -58,11 +58,11 @@ export default function HomePage() {
                                         <button
                                             onClick={() => navigate("/products")}
                                             className={`mt-6 px-6 py-3 text-white rounded-full 
-    bg-gradient-to-r from-[#3c1053] to-[#ad5389] w-fit 
-    hover:from-[#c76b9b] hover:to-[#5a1a7a]
-    transition-colors duration-500 delay-60
-    transition-opacity duration-700 delay-400
-    ${pinkInView ? "opacity-100" : "opacity-0"}
+            bg-gradient-to-r from-[#3c1053] to-[#ad5389] w-fit 
+            hover:from-[#c76b9b] hover:to-[#5a1a7a]
+            transition-colors duration-500 delay-60
+            transition-opacity duration-700 delay-400
+            ${pinkInView ? "opacity-100" : "opacity-0"}
   `}
                                         >
                                             Shop Now
