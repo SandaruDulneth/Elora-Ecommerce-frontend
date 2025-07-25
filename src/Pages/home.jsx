@@ -1,4 +1,4 @@
-import {Route, Routes, useNavigate} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import Header from "../components/header";
 import ProductPage from "./client/productPage";
@@ -32,42 +32,39 @@ export default function HomePage() {
                             <div className="snap-y snap-mandatory h-screen w-full overflow-scroll scroll-smooth">
                                 {/* PAGE 1: Pink Hero Section */}
                                 <section
-                                    className="h-screen w-full bg-gradient-to-b from-[#febdc7] via-[#edaeBF] to-[#bc84a6] snap-start flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-10"
+                                    className="h-screen w-full bg-[url('/bg04.jpg')] bg-center bg-cover snap-start flex flex-col md:flex-row items-center justify-between  md:px-10 "
                                     ref={pinkRef}
                                 >
-                                    {/* Left Text Area with animation */}
-                                    <div
-                                        className={`w-full md:w-1/2 flex flex-col justify-center text-center md:text-left transition-all duration-700 ease-in-out
-                                             ${pinkInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10" }`}>
+                                    <div className="w-screen h-screen backdrop-blur-md flex flex-col font-light">
+                                        <div className={`w-full md:w-1/2 flex flex-col justify-center text-center md:text-left transition-all duration-700 ease-in-out my-30 
+                                            ${pinkInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
 
-                                        <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
-                                            Cosmetics that
-                                        </h1>
-                                        <p
-                                            className={`text-xl mt-4 text-gray-700 transition-opacity duration-700 delay-200 ${
+                                            <h1 className="text-4xl md:text-8xl font-bold text-gray-100">
+                                                Cosmetics that
+                                            </h1>
+                                            <p
+                                                className={`text-3xl mt-4 text-gray-200 transition-opacity duration-700 delay-200 ml-2 ${
+                                                    pinkInView ? "opacity-100" : "opacity-0"}`}>
+                                                Everyone loves!
+                                            </p>
+
+                                            <p className={`text-md mt-4 ml-3 text-gray-200 max-w-md transition-opacity duration-700 delay-400 ${
                                                 pinkInView ? "opacity-100" : "opacity-0"}`}>
-                                            Everyone loves!
-                                        </p>
-
-                                        <p className={`text-sm mt-4 text-gray-700 max-w-md transition-opacity duration-700 delay-400 ${
-                                                pinkInView ? "opacity-100" : "opacity-0"}`}>
-                                            Luxurious, cruelty-free cosmetics crafted to enhance your
-                                            natural beauty. Shop our vegan, dermatologist-tested makeup
-                                            and skincare—where science meets radiance.
-                                        </p>
-                                        <button
-                                            onClick={() => navigate("/products")}
-                                            className={`mt-6 px-6 py-3 text-white rounded-full 
-            bg-gradient-to-r from-[#3c1053] to-[#ad5389] w-fit 
-            hover:from-[#c76b9b] hover:to-[#5a1a7a]
-            transition-colors duration-500 delay-60
-            transition-opacity duration-700 delay-400
-            ${pinkInView ? "opacity-100" : "opacity-0"}
-  `}
-                                        >
-                                            Shop Now
-                                        </button>
-
+                                                Luxurious, cruelty-free cosmetics crafted to enhance your
+                                                natural beauty. Shop our vegan, dermatologist-tested makeup
+                                                and skincare—where science meets radiance.
+                                            </p>
+                                            <button
+                                                onClick={() => navigate("/products")}
+                                                className={`mt-6 ml-2 px-6 py-3 text-pink-700 font-bold rounded-full 
+                                                bg-white to-[#ad5389] w-fit
+                                                hover:bg-purple-600 hover:text-black
+                                                transition-opacity duration-700 delay-550 ease-in-out
+                                                ${pinkInView ? "opacity-100" : "opacity-0"}`}
+                                            >
+                                                Shop Now
+                                            </button>
+                                        </div>
                                     </div>
                                 </section>
 
@@ -78,19 +75,13 @@ export default function HomePage() {
                                 >
                                     <h2
                                         className={`text-5xl font-bold mb-6 transition-all duration-700 ease-in-out
-                                        ${   
-                                            purpleInView
-                                                ? "opacity-100 translate-y-0"
-                                                : "opacity-0 translate-y-10"
-                                        }
-                                                   `}
+                                        ${purpleInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
                                     >
                                         Discover Our Exclusive Collection
                                     </h2>
                                     <p
                                         className={`text-xl max-w-xl text-center transition-opacity duration-700 delay-200
-                      ${purpleInView ? "opacity-100" : "opacity-0"}
-                    `}
+                                        ${purpleInView ? "opacity-100" : "opacity-0"}`}
                                     >
                                         Dive into the latest trends with our specially curated range
                                         of makeup and skincare essentials designed for every skin
@@ -103,7 +94,7 @@ export default function HomePage() {
 
                     {/* Other routes */}
                     <Route path="/products" element={<ProductPage />} />
-                    <Route path="/about" element={<AboutPage/>} />
+                    <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<h1>Contact</h1>} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />

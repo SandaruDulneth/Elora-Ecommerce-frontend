@@ -57,7 +57,7 @@ export default function ProductCard({ product }) {
 
                     <button
                         disabled={!product.isAvailable || product.stock <= 0}
-                        className="px-3 py-1 text-sm rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 transition"
+                        className="px-3 py-1 text-sm rounded-md text-white bg-gradient-to-r from-[#f80759] to-[#bc4e9c] hover:bg-blue-700 disabled:bg-gray-400 transition"
                     >
 
                         {product.isAvailable && product.stock > 0 ? "Buy Now" : "Unavailable"}

@@ -7,7 +7,7 @@ export default function Header(){
     const [sideDrawerOpened, setSideDrawerOpened] = useState(false)
 
     return(
-        <header className="w-full h-[80px] shadow-2xl flex justify-center relative ">
+        <header className="w-full z-50 h-[80px] shadow-2xl flex justify-center relative ">
             <GiHamburgerMenu className="h-full text-3xl md:hidden absolute left-2" onClick={
                 ()=>{
                     setSideDrawerOpened(true)
