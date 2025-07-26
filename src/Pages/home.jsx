@@ -6,6 +6,7 @@ import ProductOverviewPage from "./client/productOverview";
 import CartPage from "./client/cart";
 import CheckoutPage from "./client/checkOut";
 import AboutPage from "./client/aboutUs.jsx";
+import ContactUsPage from "./client/contactUs.jsx";
 
 export default function HomePage() {
     const navigate = useNavigate();
@@ -17,6 +18,11 @@ export default function HomePage() {
 
     // For Purple Scroll Section animation
     const { ref: purpleRef, inView: purpleInView } = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
+    const { ref: thirdRef, inView: thirdInView } = useInView({
         triggerOnce: true,
         threshold: 0.1,
     });
@@ -56,21 +62,23 @@ export default function HomePage() {
                                             </p>
                                             <button
                                                 onClick={() => navigate("/products")}
-                                                className={`mt-6 ml-2 px-6 py-3 text-pink-700 font-bold rounded-full 
-                                                bg-white to-[#ad5389] w-fit
-                                                hover:bg-purple-600 hover:text-black
-                                                transition-opacity duration-700 delay-550 ease-in-out
-                                                ${pinkInView ? "opacity-100" : "opacity-0"}`}
+                                                className={`mt-6 px-6 py-3 text-pink-700 font-bold rounded-full 
+                                                  bg-white to-[#ad5389] w-fit mx-auto md:ml-2
+                                                  hover:bg-gradient-to-r from-[#f80759] to-[#bc4e9c] hover:text-black
+                                                  transition-opacity duration-700 delay-550 ease-in-out
+                                                  ${pinkInView ? "opacity-100" : "opacity-0"}
+                                                  `}
                                             >
                                                 Shop Now
                                             </button>
+
                                         </div>
                                     </div>
                                 </section>
 
                                 {/* PAGE 2: Purple Scroll Page */}
                                 <section
-                                    className="h-screen w-full bg-gradient-to-br from-[#3c1053] to-[#ad5389] snap-start flex flex-col justify-center items-center text-white px-6"
+                                    className="h-screen w-full bg-gradient-to-r from-[#f80759] to-[#bc4e9c] snap-start flex flex-col justify-center items-center text-white px-6"
                                     ref={purpleRef}
                                 >
                                     <h2
@@ -88,6 +96,45 @@ export default function HomePage() {
                                         type.
                                     </p>
                                 </section>
+
+                                <section
+                                    className="h-screen w-full bg-[url('/bg08.jpg')] bg-center bg-cover snap-start flex flex-col md:flex-row items-center justify-between  md:px-10 "
+                                    ref={thirdRef}
+                                >
+                                    <div className="w-screen h-screen backdrop-blur-md flex flex-col font-light">
+                                        <div className={`w-full md:w-1/2 flex flex-col justify-center text-center md:text-left transition-all duration-700 ease-in-out my-30 
+                                            ${thirdInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+
+                                            <h1 className="text-4xl md:text-8xl font-bold text-gray-100">
+                                                Cosmetics that
+                                            </h1>
+                                            <p
+                                                className={`text-3xl mt-4 text-gray-200 transition-opacity duration-700 delay-200 ml-2 ${
+                                                    thirdRef ? "opacity-100" : "opacity-0"}`}>
+                                                Everyone loves!
+                                            </p>
+
+                                            <p className={`text-md mt-4 ml-3 text-gray-200 max-w-md transition-opacity duration-700 delay-400 ${
+                                                thirdInView ? "opacity-100" : "opacity-0"}`}>
+                                                Luxurious, cruelty-free cosmetics crafted to enhance your
+                                                natural beauty. Shop our vegan, dermatologist-tested makeup
+                                                and skincare—where science meets radiance.
+                                            </p>
+                                            <button
+                                                onClick={() => navigate("/products")}
+                                                className={`mt-6 px-6 py-3 text-pink-700 font-bold rounded-full 
+                                                  bg-white to-[#ad5389] w-fit mx-auto md:ml-2
+                                                  hover:bg-gradient-to-r from-[#f80759] to-[#bc4e9c] hover:text-black
+                                                  transition-opacity duration-700 delay-550 ease-in-out
+                                                  ${thirdInView ? "opacity-100" : "opacity-0"}
+                                                  `}
+                                            >
+                                                Shop Now
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
                         }
                     />
@@ -95,7 +142,7 @@ export default function HomePage() {
                     {/* Other routes */}
                     <Route path="/products" element={<ProductPage />} />
                     <Route path="/about" element={<AboutPage />} />
-                    <Route path="/contact" element={<h1>Contact</h1>} />
+                    <Route path="/contact" element={<ContactUsPage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="/overview/:id" element={<ProductOverviewPage />} />

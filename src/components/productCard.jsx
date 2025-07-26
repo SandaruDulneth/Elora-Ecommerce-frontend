@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
             <div className="flex-1 p-4 flex flex-col justify-between">
                 <div>
                     <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
-                    <p className="text-sm text-gray-500 mt-1 h-[48px] overflow-hidden">
+                    <p className="text-sm text-gray-500 mt-1 h-[88px] overflow-hidden">
                         {product.description}
                     </p>
                 </div>

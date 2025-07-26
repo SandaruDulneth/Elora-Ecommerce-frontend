@@ -30,7 +30,7 @@ export default function ProductOverviewPage() {
     return (
         <>
             {status == "success" && (
-                <div className="w-full h-full flex flex-col md:flex-row md:max-h-full md:overflow-y-scroll pt-4">
+                <div className="w-full h-full flex flex-col md:flex-row md:max-h-full md:overflow-y-scroll pt-4 font-light">
                     <h1 className="w-full md:hidden block my-8 text-center text-4xl text-secondary font-semibold">
                         {product.name}
                         {product.altNames.map((altName, index) => {
@@ -70,18 +70,18 @@ export default function ProductOverviewPage() {
 									<span className="text-4xl mx-4 text-gray-500 line-through">
 										{product.labelledPrice.toFixed(2)}
 									</span>
-                                    <span className="text-4xl mx-4 font-bold text-accent">
+                                    <span className="text-4xl mx-4 font-bold text-third">
 										{product.price.toFixed(2)}
 									</span>
                                 </div>
                             ) : (
-                                <span className="text-4xl mx-4 font-bold text-accent">
+                                <span className="text-4xl mx-4 font-bold text-">
 									{product.price.toFixed(2)}
 								</span>
                             )}
                             <div className="w-full flex flex-col md:flex-row gap-2 justify-center items-center mt-4">
                                 <button
-                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-accent text-white rounded-2xl hover:bg-accent/80 transition-all duration-300"
+                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-third text-white rounded-2xl hover:bg-third/90 transition-all duration-300"
                                     onClick={() => {
                                         console.log("Old cart");
                                         console.log(getCart());
@@ -93,7 +93,7 @@ export default function ProductOverviewPage() {
                                     Add to Cart
                                 </button>
                                 <button
-                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-accent text-white rounded-2xl hover:bg-accent/80 transition-all duration-300"
+                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-third text-white rounded-2xl hover:bg-third/80 transition-all duration-300"
                                     onClick={() => {
                                         navigate("/checkout", {
                                             state: {
