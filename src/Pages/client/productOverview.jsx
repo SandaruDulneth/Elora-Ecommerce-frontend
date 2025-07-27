@@ -47,7 +47,7 @@ export default function ProductOverviewPage() {
                     </div>
                     <div className="w-full md:w-[50%] flex justify-center  md:h-full ">
                         <div className="w-full md:w-[500px] md:h-[600px] flex flex-col  items-center ">
-                            <h1 className="w-full hidden md:block text-center text-4xl text-secondary font-semibold">
+                            <h1 className="w-full hidden md:block text-center text-4xl text-secondary font-semibold mt-25">
                                 {product.name}
                                 {product.altNames.map((altName, index) => {
                                     return (
