@@ -11,6 +11,7 @@ export default function ContactUsPage() {
     const [comment, setComment] = useState("");
 
     return (
+
         <motion.div
             className="flex flex-col md:flex-row w-full min-h-screen overflow-y-scroll snap-y snap-mandatory md:overflow-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -44,6 +45,10 @@ export default function ContactUsPage() {
                     exercitationem, hic iusto laboriosam minima minus molestiae nostrum, odio odit officiis perferendis
                     perspiciatis, quas tenetur totam ut!
                 </p>
+            </div>
+
+            <div className="hidden md:flex items-cente justify-center">
+                <div className="w-px h-145 bg-gray-200 my-9"></div>
             </div>
 
             {/* Right Side */}
