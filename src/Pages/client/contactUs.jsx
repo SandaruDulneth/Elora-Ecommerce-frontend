@@ -10,6 +10,31 @@ export default function ContactUsPage() {
     const [phone, setPhone] = useState("");
     const [comment, setComment] = useState("");
 
+    async function handleSubmit(){
+        try{
+            const token = localStorage.getItem("token")
+            const commentR = {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                phone: phone,
+                comment: comment,
+            }
+            axios.post("http://localhost:5000/api/comments", commentR , {
+                headers : {
+                    "Authorization" : "Bearer "+token
+                }
+            }).then(() => {
+                toast.success("Your form is submitted successfully");
+
+            }).catch((e) => {
+                toast.error(e.response.data.message)
+            })
+        }catch(e){
+            toast.error(e.response.data.message)
+        }
+    }
+
     return (
 
         <motion.div
@@ -91,7 +116,9 @@ export default function ContactUsPage() {
                         className="md:w-[605px] w-[300px] h-[150px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 py-2 resize-none placeholder-black"
                     />
 
-                    <button className="w-fit font-light px-10 h-[50px] bg-third hover:bg-third/55 delay-175 duration-500 rounded-[6px] my-[20px] text-[20px] font-bold text-white cursor-pointer">
+                    <button
+                        onClick={handleSubmit}
+                        className="w-fit font-light px-10 h-[50px] bg-third hover:bg-third/55 delay-175 duration-500 rounded-[6px] my-[20px] text-[20px] font-bold text-white cursor-pointer">
                         Submit
                     </button>
 
