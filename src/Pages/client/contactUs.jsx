@@ -45,7 +45,7 @@ export default function ContactUsPage() {
         >
             {/* Left Side */}
             <div className="w-full md:w-1/2 flex flex-col h-full bg-primary font-light snap-start px-4 py-6">
-                <h1 className="text-4xl font-bold">Contact Us</h1>
+                <h1 className="text-5xl font-bold text-third">Contact Us</h1>
                 <p className="mt-7 font-light">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, blanditiis deleniti itaque iure
                     laboriosam laborum nam nesciunt odit officiis omnis pariatur porro recusandae rem repudiandae rerum sint

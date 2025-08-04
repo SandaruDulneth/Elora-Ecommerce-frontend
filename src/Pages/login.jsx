@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
+import {GrGoogle} from "react-icons/gr";
+import {useGoogleLogin} from "@react-oauth/google";
 
 export default function LoginPage(){
 
@@ -30,6 +32,41 @@ export default function LoginPage(){
             toast.error(e.response.data.message)
         }
     }
+    //get the role from the token rather than res ing the role
+    /* import jwt_decode from "jwt-decode";
+
+const token = response.data.token;
+localStorage.setItem("token", token);
+
+// Decode token
+const decoded = jwt_decode(token);
+console.log("Decoded JWT:", decoded);
+
+// Get role
+if (decoded.role === "admin") {
+    navigate("/admin/");
+} else {
+    navigate("/");
+}
+*/
+    const googleLogin  = useGoogleLogin({
+        onSuccess: (response)=>{
+            const accessToken = response.access_token
+            axios.post("http://localhost:5000/api/users/login/google", {
+                accessToken: accessToken
+            }).then((response)=>{
+                toast.success("Login Successful")
+                const token = response.data.token
+                localStorage.setItem("token", token)
+                if(response.data.role === "admin"){
+                    navigate("/admin/")
+                }
+                else{
+                    navigate("/")
+                }
+            })
+        }
+    })
 
     return(
         <div className="w-full h-screen bg-[url('/bg03.jpg')] bg-cover bg-center flex font-normal">
@@ -55,6 +92,10 @@ export default function LoginPage(){
                         className="w-fit px-12 cursor-pointer h-[50px] bg-third hover:bg-third/60 duration-600  delay-175 rounded-[6px] my-[20px] text-[20px] text font-bold text-white"
                     >
                         Login
+                    </button>
+                    <button onClick={googleLogin} className="w-[300px] cursor-pointer h-[50px] flex justify-center items-center bg-[#c3efe9] rounded-[20px] my-[20px] text-[20px] font-bold text-white" >
+                        <GrGoogle className="text-xl text-gray-600 cursor-pointer hover:text-gray-800" />
+                        <span className="text-gray-600 text-xl font-semibold">Login with Google</span>
                     </button>
                 </div>
             </div>
