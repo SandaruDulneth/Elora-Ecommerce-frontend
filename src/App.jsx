@@ -8,6 +8,7 @@ import TestPage from "./Pages/test.jsx";
 import RegisterPage from "./Pages/register.jsx";
 import {ScrollTrigger,SplitText} from "gsap/all";
 import {GoogleOAuthProvider} from "@react-oauth/google";
+import ForgetPasswordPage from "./Pages/forgetPassword.jsx";
 
     function App() {
         return (
@@ -20,6 +21,7 @@ import {GoogleOAuthProvider} from "@react-oauth/google";
                             <Route path="/login" element={<LoginPage/>}/>
                             <Route path="/testing" element={<TestPage/>}/>
                             <Route path="/signup" element={<RegisterPage/>}/>
+                            <Route path="/forget" element={<ForgetPasswordPage/>}/>
                             <Route path='/admin/*' element={<AdminPage/>}/>
                             <Route path='/*' element={<HomePage/>}/>
                         </Routes>
