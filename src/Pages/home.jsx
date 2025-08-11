@@ -8,6 +8,7 @@ import CheckoutPage from "./client/checkOut";
 import AboutPage from "./client/aboutUs.jsx";
 import ContactUsPage from "./client/contactUs.jsx";
 import ActualHomePage from "./client/homeMain.jsx";
+import SearchProductPage from "./client/searchProducts.jsx";
 
 export default function HomePage() {
     // For Pink Hero Section animation
@@ -24,6 +25,7 @@ export default function HomePage() {
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="/overview/:id" element={<ProductOverviewPage />} />
+                    <Route path="/search" element={<SearchProductPage />} />
                     <Route path="/*" element={<h1>404 Not Found</h1>} />
                 </Routes>
             </div>
