@@ -94,11 +94,7 @@ export default function AdminOrdersPage() {
                                                     try {
                                                         const token = localStorage.getItem("token");
                                                         await axios.put(
-                                                            import.meta.env.VITE_BACKEND_URL +
-                                                            "/api/orders/" +
-                                                            activeOrder.orderId +
-                                                            "/" +
-                                                            updatedValue,
+                                                            "http://localhost:5000/api/orders/" + activeOrder.orderId + "/" + updatedValue,
                                                             {},
                                                             {
                                                                 headers: {
@@ -106,7 +102,6 @@ export default function AdminOrdersPage() {
                                                                 },
                                                             }
                                                         );
-
                                                         setIsLoading(true);
                                                         const updatedOrder = {...activeOrder};
                                                         updatedOrder.status = updatedValue;
