@@ -1,5 +1,4 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
 import Header from "../components/header";
 import ProductPage from "./client/productPage";
 import ProductOverviewPage from "./client/productOverview";
@@ -9,6 +8,7 @@ import AboutPage from "./client/aboutUs.jsx";
 import ContactUsPage from "./client/contactUs.jsx";
 import ActualHomePage from "./client/homeMain.jsx";
 import SearchProductPage from "./client/searchProducts.jsx";
+import DiscountSlider from "../components/textSlider.jsx";
 
 export default function HomePage() {
     // For Pink Hero Section animation
@@ -16,6 +16,7 @@ export default function HomePage() {
         <div className="w-full h-screen flex flex-col overflow-hidden">
             <Header />
             <div className="w-full h-[calc(100vh-80px)]">
+                <DiscountSlider />
                 <Routes>
                     <Route path="/"  element={<ActualHomePage/>}/>
                     {/* Other routes */}
