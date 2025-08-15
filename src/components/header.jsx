@@ -1,10 +1,24 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import {CgProfile} from "react-icons/cg";
+import {PiShoppingCartBold} from "react-icons/pi";
 
 export default function Header(){
     const [sideDrawerOpened, setSideDrawerOpened] = useState(false)
+
+    const navigate = useNavigate();
+
+    const handleIconClick = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            navigate("/profile"); // logged in → go to profile
+        } else {
+            navigate("/login"); // not logged in → go to login
+        }
+    };
+
 
     return(
         <header className="w-full z-50 h-[80px] shadow-2xl flex justify-center relative ">
@@ -24,9 +38,14 @@ export default function Header(){
 
             </div>
             <div className="w-[80px] hidden md:flex justify-center items-center">
-                <Link to="/cart" className="text-[20px] font-bold mx-2">
-                    <BsCart3 />
+                <Link to="/cart" className="text-[28px] font-semibold mx-2 ">
+                    <PiShoppingCartBold  />
                 </Link>
+                         <div className="text-[28px] font-bold text-black mx-2 my-4">
+                             <CgProfile    onClick={handleIconClick}/>
+                         </div>
+
+
             </div>
             {
                 sideDrawerOpened&&
@@ -47,9 +66,12 @@ export default function Header(){
                             <a href="/about" className="text-[20px] font-bold mx-2 my-4">About</a>
                             <a href="/contact" className="text-[20px] font-bold mx-2 my-4">Contact</a>
 
-                            <a href="/cart" className="text-[20px] font-bold mx-2 my-4">
+                            <a href="/cart" className="text-[28px] font-bold mx-2 my-4">
                                 <BsCart3 />
                             </a>
+                            <div className="text-[28px] font-bold text-black mx-2 my-4">
+                                <CgProfile    onClick={handleIconClick}/>
+                            </div>
                         </div>
 
                     </div>

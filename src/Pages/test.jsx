@@ -1,35 +1,37 @@
-import { useState } from "react"
-import mediaUpload from "../utils/mediaUpload"
+import React, { useState } from "react";
 
+export default function OverlayExample() {
+    const [isOpen, setIsOpen] = useState(false);
 
-export default function TestPage(){
-    const [image , setImage] = useState(null)
+    return (
+        <div className="p-4">
+            <button
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+                onClick={() => setIsOpen(true)}
+            >
+                Show Overlay
+            </button>
 
-
-
-    function fileUpload(){
-
-        mediaUpload(image).then(
-            (res)=>{
-                console.log(res)
-            }
-        ).catch(
-            (res)=>{
-                console.log(res)
-            }
-        )
-        //const url = await mediaUpload(image)
-    }
-
-    return(
-        <div className="w-full h-screen  flex justify-center items-center flex-col">
-            <input type="file" className="file-input file-input-bordered w-full max-w-xs"
-                   onChange={(e)=>{
-
-                       setImage(e.target.files[0])
-
-                   }} />
-            <button onClick={fileUpload} className="bg-green-500 text-white font-bold py-2 px-4 rounded">Upload</button>
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+                    onClick={() => setIsOpen(false)} // Close when clicking outside
+                >
+                    <div
+                        className="bg-white p-6 rounded shadow-lg w-96"
+                        onClick={(e) => e.stopPropagation()} // Prevent closing on content click
+                    >
+                        <h2 className="text-xl font-bold mb-4">Overlay Content</h2>
+                        <p>This is inside the overlay.</p>
+                        <button
+                            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 }

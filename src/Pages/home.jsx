@@ -9,6 +9,7 @@ import ContactUsPage from "./client/contactUs.jsx";
 import ActualHomePage from "./client/homeMain.jsx";
 import SearchProductPage from "./client/searchProducts.jsx";
 import DiscountSlider from "../components/textSlider.jsx";
+import Profilepage from "./client/profile.jsx";
 
 export default function HomePage() {
     // For Pink Hero Section animation
@@ -24,6 +25,7 @@ export default function HomePage() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactUsPage />} />
                     <Route path="/cart" element={<CartPage />} />
+                    <Route path="/profile" element={<Profilepage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="/overview/:id" element={<ProductOverviewPage />} />
                     <Route path="/search" element={<SearchProductPage />} />

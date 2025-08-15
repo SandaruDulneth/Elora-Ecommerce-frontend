@@ -17,10 +17,11 @@ export default function LoginPage(){
                 email:email,
                 password:password
             })
-            //alert("Login Successful")
+
             toast.success("Login Successful")
             console.log(response.data)
             localStorage.setItem("token",response.data.token)
+            localStorage.setItem("email",response.data.email)
 
             if(response.data.role === "admin"){
                 navigate("/admin/")
@@ -78,7 +79,7 @@ if (decoded.role === "admin") {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                         placeholder="Email"
-                        className="w-[300px] h-[50px] border border-third hover:border-third focus:outline-none rounded-[5px] my-[20px] px-4 text-primary"
+                        className="w-[300px] h-[50px] border border-third hover:border-pink-200 focus:outline-none rounded-[5px] my-[20px] px-4 text-primary"
                     />
                     <input
                         onChange={(e) => setPassword(e.target.value)}

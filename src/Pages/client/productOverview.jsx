@@ -45,8 +45,8 @@ export default function ProductOverviewPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="w-screen h-screen backdrop-blur-sm flex flex-wrap justify-center items-center font-light pt-4">
-                <div className="w-screen h-screen flex flex-wrap justify-center items-center font-light">
+            <div className="w-full h-screen backdrop-blur-sm flex flex-wrap justify-center items-center font-light pt-4">
+                <div className="w-full h-screen flex flex-wrap justify-center items-center font-light">
                     {/* Mobile title */}
                     <motion.h1
                         className="w-full md:hidden block my-8 text-center text-4xl text-secondary font-semibold"

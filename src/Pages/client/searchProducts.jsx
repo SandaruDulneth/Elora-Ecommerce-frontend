@@ -3,6 +3,7 @@ import { useState } from "react";
 import ProductCard from "../../components/productCard";
 import toast from "react-hot-toast";
 import Loading from "../../components/loading.jsx";
+import {TbShoppingBagSearch} from "react-icons/tb";
 
 export default function SearchProductPage() {
     const [products, setProducts] = useState([]);
@@ -10,11 +11,11 @@ export default function SearchProductPage() {
     const [query, setQuery] = useState("");
 
     return (
-        <div className="w-full h-full flex flex-col items-center p-4">
+        <div className="w-full h-full flex flex-col items-center p-4 font-light font-semibold">
             <input
                 type="text"
                 placeholder="Search for products..."
-                className="w-[300px] h-[40px] px-4 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
+                className="w-[300px] h-[40px] px-4 mb-4 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-third"
                 value={query}
                 onChange={async (e) => {
                     setQuery(e.target.value);
@@ -39,8 +40,9 @@ export default function SearchProductPage() {
             />
             <div className="w-full h-full flex flex-row flex-wrap justify-center items-center">
                 {query.length == 0 ? (
-                    <h1 className="text-2xl text-secondary font-semibold">
-                        Please enter a search query
+                    <h1 className=" text-third font-bold mb-10  mr-12 ">
+                        <TbShoppingBagSearch className="text-[450px] opacity-6" />
+
                     </h1>
                 ) : (
                     <>
