@@ -65,7 +65,7 @@ export default function ProductCard({ product }) {
 
                     <button
                         disabled={!inStock}
-                        className="px-3 py-1 text-sm rounded-md text-white bg-gradient-to-r from-[#f80759] to-[#bc4e9c] hover:brightness-110 disabled:bg-gray-400 transition"
+                        className="px-3 py-1 text-sm rounded-md text-white bg-third hover:bg-third/70 transition delay-105"
                     >
                         {inStock ? "Buy Now" : "Unavailable"}
                     </button>

@@ -98,29 +98,29 @@ export default function ProductOverviewPage() {
                             {product.labelledPrice > product.price ? (
                                 <div>
                 <span className="text-2xl md:text-4xl mx-2 text-gray-500 line-through font-normal">
-                  {product.labelledPrice.toFixed(2)}
+                 LKR {product.labelledPrice.toFixed(2)}
                 </span>
                                     <span className="text-2xl md:text-4xl mx-2 font-bold text-third font-normal">
-                  {product.price.toFixed(2)}
+                 LKR {product.price.toFixed(2)}
                 </span>
                                 </div>
                             ) : (
                                 <span className="text-2xl md:text-4xl mx-2 font-bold font-normal">
-                {product.price.toFixed(2)}
+               LKR {product.price.toFixed(2)}
               </span>
                             )}
 
                             {/* Buttons */}
                             <div className="w-full flex flex-col md:flex-row gap-3 justify-center items-center mt-4">
                                 <motion.button
-                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/90 transition-all duration-300"
+                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/70 text-xl transition-all duration-300"
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => addToCart(product, 1)}
                                 >
                                     Add to Cart
                                 </motion.button>
                                 <motion.button
-                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/80 transition-all duration-300"
+                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/70 text-xl transition-all duration-300"
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() =>
                                         navigate("/checkout", {
