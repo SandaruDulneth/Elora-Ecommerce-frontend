@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { PiShoppingCartBold } from "react-icons/pi";
+import {IoSearch} from "react-icons/io5";
 
 export default function Header() {
     const [sideDrawerOpened, setSideDrawerOpened] = useState(false);
@@ -46,20 +47,23 @@ export default function Header() {
             />
 
             {/* desktop */}
-            <div className="w-[calc(100%-160px)] h-full hidden md:flex justify-center items-center font-light">
-                <Link to="/" className="text-[20px] font-semibold mx-2">Home</Link>
-                <Link to="/products" className="text-[20px] font-semibold mx-2">Products</Link>
-                <Link to="/" className="text-[30px] font-bold mx-7">BRAND</Link>
-                <Link to="/about" className="text-[20px] font-semibold mx-2">About</Link>
-                <Link to="/contact" className="text-[20px] font-semibold mx-2">Contact</Link>
-                <Link to="/search" className="text-[20px] font-semibold mx-2">Search</Link>
+            <div className="w-[calc(100%-160px)] h-full hidden md:flex justify-center items-center font-light tracking-wide">
+                <Link to="/" className="text-[22px]  mx-2">Home</Link>
+                <Link to="/products" className="text-[22px]  mx-2">Products</Link>
+                <Link to="/" className="text-[32px] mx-8">Elorá</Link>
+                <Link to="/about" className="text-[22px]  mx-2">About</Link>
+                <Link to="/contact" className="text-[22px]  mx-2">Contact</Link>
+
             </div>
 
             <div className="w-[80px] hidden md:flex justify-center items-center">
-                <Link to="/cart" className="text-[28px] font-semibold mx-2 ">
+                <Link to="/search" className="text-[28px]  mx-2 ">
+                    <IoSearch />
+                </Link>
+                <Link to="/cart" className="text-[28px]  mx-2 ">
                     <PiShoppingCartBold />
                 </Link>
-                <div className="text-[28px] font-bold text-black mx-2 my-4">
+                <div className="text-[28px] font-bold text-black mx-2 my-4 mr-10">
                     <CgProfile onClick={handleIconClick} className="cursor-pointer" />
                 </div>
             </div>
@@ -91,20 +95,25 @@ export default function Header() {
                             className="h-full text-3xl absolute left-2 cursor-pointer"
                             onClick={() => setSideDrawerOpened(false)}
                         />
-                        <img
+                        <h1
                             onClick={closeAnd(() => navigate("/"))}
-                            src="/logo.png"
-                            alt="Logo"
-                            className="w-[80px] h-[80px] object-cover cursor-pointer"
-                        />
+                            className="text-3xl font-light cursor-pointer select-none"
+                        >
+                            Elorá
+                        </h1>
+
                     </div>
 
-                    <div className="w-full h-[calc(100%-80px)] flex flex-col items-center gap-2 font-light">
+                    <div className="w-full h-[calc(100%-80px)] flex flex-col items-center gap-2 font-light tracking-wide ">
                         {/* Use Link, and close drawer on click */}
-                        <Link to="/" onClick={() => setSideDrawerOpened(false)} className="text-[20px] font-bold mx-2 my-4">Home</Link>
-                        <Link to="/products" onClick={() => setSideDrawerOpened(false)} className="text-[20px] font-bold mx-2 my-4">Products</Link>
-                        <Link to="/about" onClick={() => setSideDrawerOpened(false)} className="text-[20px] font-bold mx-2 my-4">About</Link>
-                        <Link to="/contact" onClick={() => setSideDrawerOpened(false)} className="text-[20px] font-bold mx-2 my-4">Contact</Link>
+                        <Link to="/" onClick={() => setSideDrawerOpened(false)} className="text-[20px]  mx-2 my-4">Home</Link>
+                        <Link to="/products" onClick={() => setSideDrawerOpened(false)} className="text-[20px]  mx-2 my-4">Products</Link>
+                        <Link to="/about" onClick={() => setSideDrawerOpened(false)} className="text-[20px]  mx-2 my-4">About</Link>
+                        <Link to="/contact" onClick={() => setSideDrawerOpened(false)} className="text-[20px]  mx-2 my-4">Contact</Link>
+
+                        <Link to="/search" className="text-[28px] font-semibold mx-2 ">
+                            <IoSearch />
+                        </Link>
 
                         <Link to="/cart" onClick={() => setSideDrawerOpened(false)} className="text-[28px] font-bold mx-2 my-4">
                             <BsCart3 />

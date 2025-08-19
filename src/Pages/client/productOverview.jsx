@@ -6,6 +6,7 @@ import ImageSlider from "../../components/imageSlider";
 import Loading from "../../components/loading";
 import { addToCart, getCart } from "../../utils/cart";
 import { motion } from "framer-motion";
+import Reviews from "../../components/review.jsx";
 
 export default function ProductOverviewPage() {
     const params = useParams();
@@ -16,7 +17,7 @@ export default function ProductOverviewPage() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/api/products/${productId}`)
+            .get(import.meta.env.VITE_BACKEND_URL+`/api/products/${productId}`)
             .then((response) => {
                 setProduct(response.data);
                 setStatus("success");
@@ -40,37 +41,18 @@ export default function ProductOverviewPage() {
 
     return (
         <motion.div
-            className="w-full h-full flex bg-[url('/doodle01.jpeg')] flex-col md:flex-row md:max-h-full md:overflow-y-scroll font-light"
+            className="w-full h-full flex bg-[url('/doodle01.jpeg')] flex-col max-h-full overflow-y-auto font-light"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="w-full h-screen backdrop-blur-sm flex flex-wrap justify-center items-center font-light pt-4">
-                <div className="w-full h-screen flex flex-wrap justify-center items-center font-light">
-                    {/* Mobile title */}
-                    <motion.h1
-                        className="w-full md:hidden block my-8 text-center text-4xl text-secondary font-semibold"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        {product.name}
-                        {product.altNames.map((altName, index) => (
-                            <motion.span
-                                key={index}
-                                className="text-4xl text-gray-600"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.3 + index * 0.1 }}
-                            >
-                                {" | " + altName}
-                            </motion.span>
-                        ))}
-                    </motion.h1>
+            {/* Product Content */}
+            <div className="w-full backdrop-blur-sm flex flex-col md:flex-row justify-center items-center font-light pt-4">
+                <div className="w-full flex flex-col md:flex-row justify-center items-center">
 
                     {/* Image slider */}
                     <motion.div
-                        className="w-full md:w-[50%] md:h-full flex justify-center"
+                        className="w-full md:w-[50%] flex justify-center"
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
@@ -80,19 +62,19 @@ export default function ProductOverviewPage() {
 
                     {/* Product details */}
                     <motion.div
-                        className="w-full md:w-[50%] flex justify-center md:h-full"
+                        className="w-full md:w-[50%] flex justify-center md:h-full mt-6 md:mt-0"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <div className="w-full md:w-[500px] md:h-[600px] flex flex-col items-center">
-                            {/* Desktop title */}
-                            <h1 className="w-full hidden md:block text-center text-4xl text-secondary font-semibold mt-25">
+                        <div className="w-full md:w-[500px] flex flex-col items-center px-4">
+                            {/* Title */}
+                            <h1 className="w-full text-center text-3xl md:text-5xl text-gray-700 font-semibold">
                                 {product.name}
                                 {product.altNames.map((altName, index) => (
                                     <motion.span
                                         key={index}
-                                        className="text-4xl text-gray-600"
+                                        className="text-xl md:text-3xl text-gray-600"
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         transition={{ delay: 0.3 + index * 0.1 }}
@@ -108,42 +90,39 @@ export default function ProductOverviewPage() {
                             </p>
 
                             {/* Description */}
-                            <p className="w-full text-center my-2 text-md text-gray-600 font-semibold">
+                            <p className="w-full text-center my-2 text-md text-gray-600 font-semibold px-2">
                                 {product.description}
                             </p>
 
                             {/* Price */}
                             {product.labelledPrice > product.price ? (
                                 <div>
-                                    <span className="text-4xl mx-4 text-gray-500 line-through">
-                                        {product.labelledPrice.toFixed(2)}
-                                    </span>
-                                    <span className="text-4xl mx-4 font-bold text-third">
-                                        {product.price.toFixed(2)}
-                                    </span>
+                <span className="text-2xl md:text-4xl mx-2 text-gray-500 line-through font-normal">
+                  {product.labelledPrice.toFixed(2)}
+                </span>
+                                    <span className="text-2xl md:text-4xl mx-2 font-bold text-third font-normal">
+                  {product.price.toFixed(2)}
+                </span>
                                 </div>
                             ) : (
-                                <span className="text-4xl mx-4 font-bold">
-                                    {product.price.toFixed(2)}
-                                </span>
+                                <span className="text-2xl md:text-4xl mx-2 font-bold font-normal">
+                {product.price.toFixed(2)}
+              </span>
                             )}
 
                             {/* Buttons */}
-                            <div className="w-full flex flex-col md:flex-row gap-2 justify-center items-center mt-4">
+                            <div className="w-full flex flex-col md:flex-row gap-3 justify-center items-center mt-4">
                                 <motion.button
-                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-third text-white rounded-2xl hover:bg-third/90 transition-all duration-300"
+                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/90 transition-all duration-300"
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        addToCart(product, 1);
-                                        toast.success("Added to cart");
-                                    }}
+                                    onClick={() => addToCart(product, 1)}
                                 >
                                     Add to Cart
                                 </motion.button>
                                 <motion.button
-                                    className="w-[200px] h-[50px] mx-4 cursor-pointer bg-third text-white rounded-2xl hover:bg-third/80 transition-all duration-300"
+                                    className="w-[200px] h-[50px] bg-third text-white rounded-2xl hover:bg-third/80 transition-all duration-300"
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
+                                    onClick={() =>
                                         navigate("/checkout", {
                                             state: {
                                                 cart: [
@@ -157,8 +136,8 @@ export default function ProductOverviewPage() {
                                                     },
                                                 ],
                                             },
-                                        });
-                                    }}
+                                        })
+                                    }
                                 >
                                     Buy Now
                                 </motion.button>
@@ -167,6 +146,14 @@ export default function ProductOverviewPage() {
                     </motion.div>
                 </div>
             </div>
+
+            {/* Reviews Section */}
+            <div className="w-full flex justify-center items-center  px-4 backdrop-blur-sm my-0">
+                <div className="w-full md:w-[70%]">
+                    <Reviews />
+                </div>
+            </div>
         </motion.div>
     );
+
 }

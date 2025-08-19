@@ -8,6 +8,8 @@ import AdminProductsPage from "./products.jsx";
 import AdminOrdersPage from "./orders.jsx";
 import AddProductPage from "./addProducts.jsx";
 import EditProductPage from "./editProducts.jsx";
+import AdminUsersPage from "./users.jsx";
+import AddUserPage from "./addUsers.jsx";
 
 export default function AdminPage() {
     const location = useLocation();
@@ -74,10 +76,11 @@ export default function AdminPage() {
                     <div className="h-full w-[calc(100%-300px)]  border-accent border-4 rounded-xl bg-white">
                         <Routes path="/*">
                             <Route path="/products" element={<AdminProductsPage />} />
-                            <Route path="/users" element={<h1>Users</h1>} />
+                            <Route path="/users" element={<AdminUsersPage />} />
                             <Route path="/orders" element={<AdminOrdersPage />} />
                             <Route path="/reviews" element={<h1>Reviews</h1>} />
                             <Route path="/add-product" element={<AddProductPage />} />
+                            <Route path="/add-user" element={<AddUserPage />} />
                             <Route path="/edit-product" element={<EditProductPage />} />
                         </Routes>
                     </div>

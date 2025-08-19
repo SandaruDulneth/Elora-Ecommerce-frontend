@@ -5,7 +5,7 @@ import mediaUpload from "../../utils/mediaUpload";
 import axios from "axios";
 
 export default function EditProductPage() {
-    const location = useLocation()//WHEN READING DATA FROM ANTHER PAGE
+    const location = useLocation()//WHEN READING DATA FROM ANoTHER PAGE
     const [productId, setProductId] = useState(location.state.productId);//from here to down it set the data
     // from that location state of the row wich we clicked the edit icon
     const [name, setName] = useState(location.state.name);

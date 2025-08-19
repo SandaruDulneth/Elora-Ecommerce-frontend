@@ -50,7 +50,7 @@ export default function AddProductPage() {
                 price : price,
                 stock : stock,
             }
-            axios.post("http://localhost:5000/api/products", product , {
+            axios.post(import.meta.env.VITE_BACKEND_URL+"/api/products", product , {
                 headers : {
                     "Authorization" : "Bearer "+token
                 }

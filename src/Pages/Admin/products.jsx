@@ -13,7 +13,7 @@ export default function AdminProductsPage() {
     useEffect(() => {
         if (isLoading) {
             axios
-                .get( "http://localhost:5000/api/products")
+                .get( import.meta.env.VITE_BACKEND_URL+"/api/products")
                 .then((res) => {
                     setProducts(res.data);
                     setIsLoading(false);
@@ -32,7 +32,7 @@ export default function AdminProductsPage() {
             return;
         }
         axios
-            .delete("http://localhost:5000/api/products/" + productId, {
+            .delete(import.meta.env.VITE_BACKEND_URL+"/api/products/" + productId, {
                 headers: {
                     Authorization: "Bearer " + token,
                 },

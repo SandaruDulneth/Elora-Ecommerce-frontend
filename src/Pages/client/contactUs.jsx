@@ -20,7 +20,7 @@ export default function ContactUsPage() {
                 phone: phone,
                 comment: comment,
             }
-            axios.post("http://localhost:5000/api/comments", commentR , {
+            axios.post(import.meta.env.VITE_BACKEND_URL+"/api/comments", commentR , {
                 headers : {
                     "Authorization" : "Bearer "+token
                 }
@@ -35,100 +35,107 @@ export default function ContactUsPage() {
         }
     }
 
-    return (
 
+    return (
         <motion.div
-            className="flex flex-col md:flex-row w-full min-h-screen overflow-y-scroll snap-y snap-mandatory md:overflow-auto"
+            className="w-full max-h-full overflow-y-auto md:max-h-full md:overflow-y-auto lg:h-auto lg:overflow-visible"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            {/* Left Side */}
-            <div className="w-full md:w-1/2 flex flex-col h-full bg-primary font-light snap-start px-4 py-6">
-                <h1 className="text-5xl font-bold text-third">Contact Us</h1>
-                <p className="mt-7 font-light">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, blanditiis deleniti itaque iure
-                    laboriosam laborum nam nesciunt odit officiis omnis pariatur porro recusandae rem repudiandae rerum sint
-                    veritatis, vero voluptatum?
-                </p>
-                <p className="mt-4">Sir Lankans only</p>
+            <div className="mx-auto max-w-9xl px-3 sm:px-5 lg:px-5 py-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
 
-                <p className="text-xl font-bold mt-8 font-light">HOURS OF OPERATION</p>
-                <p className="font-semibold mt-2 font-light">Phone & E-mail</p>
-                <p className="font-normal mt-1">
-                    8AM-12AM <br /> 1AM-5AM
-                </p>
+                    {/* Left side */}
+                    <section className="bg-primary text-black font-light">
+                        <h1 className="text-4xl sm:text-5xl font-medium text-third mb-10  ">Contact Us</h1>
 
-                <p className="text-xl font-bold mt-8 font-light">Live Chat</p>
-                <p className="font-semibold mt-2 font-light">Phone & E-mail</p>
-                <p className="font-normal mt-1">
-                    8AM-12AM <br /> 1AM-5AM
-                </p>
+                        <p className="mt-8">
+                            We’d love to connect with you! Whether you’re curious about our products, need help with your order, or simply want to learn more about Elorá, our team is always here to assist you. Reach out anytime — because your beauty journey matters to us.
+                        </p>
 
-                <p className="mt-5">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur consequatur eaque excepturi
-                    exercitationem, hic iusto laboriosam minima minus molestiae nostrum, odio odit officiis perferendis
-                    perspiciatis, quas tenetur totam ut!
-                </p>
-            </div>
+                        <h2 className="text-xl font-bold mt-8">HOURS OF OPERATION</h2>
+                        <p className="font-semibold mt-2">Phone &amp; E-mail</p>
+                        <p className="mt-1">8AM-12AM <br /> 1AM-5AM</p>
 
-            <div className="hidden md:flex items-cente justify-center">
-                <div className="w-px h-145 bg-gray-200 my-9"></div>
-            </div>
+                        <h2 className="text-xl font-bold mt-8">Live Chat</h2>
+                        <p className="font-semibold mt-2">Phone &amp; E-mail</p>
+                        <p className="mt-1">8AM-12AM <br /> 1AM-5AM</p>
 
-            {/* Right Side */}
-            <div className="w-full md:w-1/2 flex-col h-full justify-center items-center bg-primary snap-start px-4 py-6">
-                <div className="flex flex-col font-light text-black items-center justify-center">
-                    <div className="flex flex-col md:flex-row items-center justify-center mt-10">
-                        <input
-                            onChange={(e) => setFirstName(e.target.value)}
-                            value={firstName}
-                            placeholder="First Name *"
-                            className="w-[300px] h-[50px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 placeholder-black"
-                        />
-                        <input
-                            onChange={(e) => setLastName(e.target.value)}
-                            value={lastName}
-                            placeholder="Last Name *"
-                            className="w-[300px] h-[50px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 md:ml-2 placeholder-black"
-                        />
-                    </div>
+                        <p className="mt-5">
+                            Need quick answers? Our live chat support is available during business hours to guide you with product recommendations, order updates, or any inquiries you may have.
+                        </p>
+                    </section>
 
-                    <div className="flex flex-col md:flex-row items-center justify-center">
-                        <input
-                            onChange={(e) => setPhone(e.target.value)}
-                            value={phone}
-                            placeholder="Phone *"
-                            className="w-[300px] h-[50px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 placeholder-black"
-                        />
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            placeholder="Email *"
-                            className="w-[300px] h-[50px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 md:ml-2 placeholder-black"
-                        />
-                    </div>
 
-                    <textarea
-                        onChange={(e) => setComment(e.target.value)}
-                        value={comment}
-                        placeholder="Your message *"
-                        className="md:w-[605px] w-[300px] h-[150px] border border-third focus:outline-none rounded-[5px] my-[10px] px-4 py-2 resize-none placeholder-black"
-                    />
+                    {/* Right side */}
+                    <section className="bg-primary text-black flex flex-col">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSubmit();
+                            }}
+                            className="flex flex-col items-stretch"
+                        >
+                            {/* name fields */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mt-2">
+                                <input
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    value={firstName}
+                                    placeholder="First Name *"
+                                    className="w-full max-w-xl border border-pink-200 rounded-md px-4 py-3 placeholder-black"
+                                />
+                                <input
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={lastName}
+                                    placeholder="Last Name *"
+                                    className="w-full max-w-xl border border-pink-200 rounded-md px-4 py-3 placeholder-black"
+                                />
+                            </div>
 
-                    <button
-                        onClick={handleSubmit}
-                        className="w-fit font-light px-10 h-[50px] bg-third hover:bg-third/55 delay-175 duration-500 rounded-[6px] my-[20px] text-[20px] font-bold text-white cursor-pointer">
-                        Submit
-                    </button>
+                            {/* phone / email */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 mt-3">
+                                <input
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    value={phone}
+                                    placeholder="Phone *"
+                                    className="w-full max-w-xl border border-pink-200 rounded-md px-4 py-3 placeholder-black"
+                                />
+                                <input
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                    placeholder="Email *"
+                                    className="w-full max-w-xl border border-pink-200 rounded-md px-4 py-3 placeholder-black"
+                                />
+                            </div>
 
-                    <p className="mx-5 mt-6 text-center">
-                        We’d love to hear from you! Whether you have a question about our products, need assistance, or just
-                        want to share your feedback, our team is here and ready to help. Fill out the form above, and we’ll get
-                        back to you as soon as possible.
-                    </p>
+                            {/* message */}
+                            <textarea
+                                onChange={(e) => setComment(e.target.value)}
+                                value={comment}
+                                placeholder="Your message *"
+                                className="mt-3 w-full max-w-2xl min-h-[140px] border border-pink-200 rounded-md px-4 py-3 resize-y placeholder-black"
+                            />
+
+                            {/* button */}
+                            <div className="mt-5">
+                                <button
+                                    type="submit"
+                                    className="inline-flex font-light text-md items-center justify-center px-8 py-3 bg-third hover:bg-third/80 rounded-lg text-white font-semibold transition"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+
+                            <p className="mt-6 text-center md:text-left font-light">
+                                At Elorá, your satisfaction is our priority. No matter your question or concern, we’re committed to providing fast, friendly, and reliable support. Send us a message and we’ll get back to you as quickly as possible.
+                            </p>
+
+                        </form>
+                    </section>
                 </div>
             </div>
         </motion.div>
     );
+
 }

@@ -11,11 +11,13 @@ export default function SearchProductPage() {
     const [query, setQuery] = useState("");
 
     return (
-        <div className="w-full h-full flex flex-col items-center p-4 font-light font-semibold">
+        <div className="w-full h-full flex flex-col items-center font-light bg-[url('/doodle01.jpeg')] bg-center bg-cover ">
+            <div className="w-full h-full backdrop-blur-xs flex flex-col items-center p-4  ">
             <input
                 type="text"
                 placeholder="Search for products..."
-                className="w-[300px] h-[40px] px-4 mb-4 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-third"
+                className="w-[300px] h-[40px] px-4 mb-4 rounded-lg border border-third focus:outline-none focus:ring-1 focus:ring-third
+                placeholder:text-pink-100 bg-third/40 "
                 value={query}
                 onChange={async (e) => {
                     setQuery(e.target.value);
@@ -26,7 +28,7 @@ export default function SearchProductPage() {
                         return;
                     }
                     try{
-                        const response = await axios.get("http://localhost:5000/api/products/search/" +
+                        const response = await axios.get(import.meta.env.VITE_BACKEND_URL+"/api/products/search/" +
                             e.target.value
                         );
                         setProducts(response.data);
@@ -41,7 +43,7 @@ export default function SearchProductPage() {
             <div className="w-full h-full flex flex-row flex-wrap justify-center items-center">
                 {query.length == 0 ? (
                     <h1 className=" text-third font-bold mb-10  mr-12 ">
-                        <TbShoppingBagSearch className="text-[450px] opacity-6" />
+                        <TbShoppingBagSearch className="text-[450px] opacity-0" />
 
                     </h1>
                 ) : (
@@ -59,6 +61,7 @@ export default function SearchProductPage() {
                         )}
                     </>
                 )}
+            </div>
             </div>
         </div>
     );

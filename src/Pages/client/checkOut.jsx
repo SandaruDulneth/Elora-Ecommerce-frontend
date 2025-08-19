@@ -1,182 +1,219 @@
-import axios from "axios";
-import { useState } from "react";
-import toast from "react-hot-toast";
-
+import { useState, useMemo } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { BiMinus, BiPlus, BiTrash } from "react-icons/bi";
-import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function CheckoutPage() {
     const location = useLocation();
-    console.log(location.state.cart);
-
     const [cart, setCart] = useState(location.state?.cart || []);
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
 
-    function getTotal() {
-        let total = 0;
-        cart.forEach((item) => {
-            total += item.price * item.qty;
-        });
-        return total;
-    }
-    function removeFromCart(index) {
-        const newCart = cart.filter((item, i) => i !== index);
-        setCart(newCart);
-    }
+    const subtotal = useMemo(
+        () => cart.reduce((s, it) => s + it.price * it.qty, 0),
+        [cart]
+    );
 
-    function changeQty(index, qty) {
-        const newQty = cart[index].qty + qty;
-        if (newQty <= 0) {
-            removeFromCart(index);
-            return;
-        } else {
-            const newCart = [...cart];
-            newCart[index].qty = newQty;
-            setCart(newCart);
-        }
-    }
+    // update qty
+    const changeQty = (index, delta) => {
+        const next = [...cart];
+        const newQty = next[index].qty + delta;
+        if (newQty <= 0) next.splice(index, 1);
+        else next[index] = { ...next[index], qty: newQty };
+        setCart(next);
+    };
+
+    // remove item
+    const removeLine = (index) => {
+        setCart(cart.filter((_, i) => i !== index));
+    };
+
+    // place order
     async function placeOrder() {
         const token = localStorage.getItem("token");
         if (!token) {
             toast.error("Please login to place order");
             return;
         }
+        if (!phone || !address) {
+            toast.error("Please enter phone & address");
+            return;
+        }
+        if (cart.length === 0) {
+            toast.error("Your cart is empty");
+            return;
+        }
 
         const orderInformation = {
-            products: [],
-            phone: phoneNumber,
-            address: address,
+            phone,
+            address,
+            products: cart.map((c) => ({
+                productId: c.productId,
+                qty: c.qty,
+            })),
         };
 
-        for (let i = 0; i < cart.length; i++) {
-            const item = {
-                productId: cart[i].productId,
-                qty: cart[i].qty,
-            };
-            orderInformation.products[i] = item;
-        }
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/orders",
+                import.meta.env.VITE_BACKEND_URL+"/api/orders",
                 orderInformation,
-                {
-                    headers: {
-                        Authorization: "Bearer " + token,
-                    },
-                }
+                { headers: { Authorization: "Bearer " + token } }
             );
             toast.success("Order placed successfully");
             console.log(res.data);
         } catch (err) {
-            console.log(err);
+            console.error(err);
             toast.error("Error placing order");
-            return;
         }
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-center pt-4 relative ">
-            <div className="w-[400px]  shadow-2xl absolute top-1 right-1 flex flex-col justify-center items-center p-1 gap-10">
-                <p className="text-2xl text-secondary font-bold">
-                    Total:
-                    <span className="text-accent font-bold mx-2">
-						{getTotal().toFixed(2)}
-					</span>
-                </p>
-                <div>
-                    <input
-                        type="text"
-                        placeholder="Phone Number"
-                        className="w-full h-[40px] px-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Address"
-                        className="w-full h-[40px] px-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent mt-2"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                    />
-                </div>
-                <button
-                    className="text-white bg-accent px-4 py-2 rounded-lg font-bold hover:bg-secondary transition-all duration-300"
-                    onClick={placeOrder}
+        <main className="mx-auto max-w-6xl px-4 py-10 min-h-[100dvh]">
+            {/* Back link + title */}
+            <div className="mb-8">
+                <Link
+                    to="/cart"
+                    className="relative inline-block text-sm text-gray-500 hover:text-gray-700 group"
                 >
-                    Place Order
-                </button>
+                    &larr; Back to shopping cart
+                    <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-gray-700 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+
+                <h1 className="mt-3 text-3xl font-light tracking-wide">Checkout</h1>
             </div>
-            {cart.map((item, index) => {
-                return (
-                    <div
-                        key={item.productId}
-                        className="w-[600px] my-4 h-[100px] rounded-tl-3xl rounded-bl-3xl bg-primary shadow-2xl flex flex-row relative justify-center items-center"
-                    >
-                        <img
-                            src={item.image}
-                            className="w-[100px] h-[100px] object-cover rounded-3xl"
-                        />
-                        <div className="w-[250px] h-full flex flex-col justify-center items-start pl-4">
-                            <h1 className="text-xl text-secondary font-semibold">
-                                {item.name}
-                            </h1>
-                            <h1 className="text-md text-gray-600 font-semibold">
-                                {item.productId}
-                            </h1>
-                            {item.labelledPrice > item.price ? (
-                                <div>
-									<span className="text-md mx-1 text-gray-500 line-through">
-										{item.labelledPrice.toFixed(2)}
-									</span>
-                                    <span className="text-md mx-1 font-bold text-accent">
-										{item.price.toFixed(2)}
-									</span>
-                                </div>
-                            ) : (
-                                <span className="text-md mx-1 font-bold text-accent">
-									{item.price.toFixed(2)}
-								</span>
-                            )}
+
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+                {/* LEFT: phone + address */}
+                <section className="lg:col-span-8 space-y-10">
+                    <div>
+                        <h2 className="mb-4 text-xl font-medium tracking-wide">
+                            Contact & Address
+                        </h2>
+                        <div className="grid grid-cols-1 gap-5">
+                            <Field label="Phone" value={phone} onChange={setPhone} />
+                            <Field label="Address" value={address} onChange={setAddress} />
                         </div>
-                        <div className="max-w-[100px] w-[100px]  h-full flex flex-row justify-evenly items-center">
-                            <button
-                                className="text-white font-bold rounded-xl hover:bg-secondary p-2 text-xl cursor-pointer aspect-square bg-accent"
-                                onClick={() => {
-                                    changeQty(index, -1);
-                                }}
-                            >
-                                <BiMinus />
-                            </button>
-                            <h1 className="text-xl text-secondary font-semibold h-full flex items-center">
-                                {item.qty}
-                            </h1>
-                            <button
-                                className="text-white font-bold rounded-xl hover:bg-secondary p-2 text-xl cursor-pointer  aspect-square bg-accent"
-                                onClick={() => {
-                                    changeQty(index, 1);
-                                }}
-                            >
-                                <BiPlus />
-                            </button>
-                        </div>
-                        {/* total */}
-                        <div className="w-[200px] h-full flex flex-col justify-center items-end pr-4">
-                            <h1 className="text-2xl text-secondary font-semibold">
-                                Rs. {(item.price * item.qty).toFixed(2)}
-                            </h1>
-                        </div>
-                        <button
-                            className="absolute text-red-600 cursor-pointer hover:bg-red-600 hover:text-white rounded-full p-2 right-[-35px] "
-                            onClick={() => {
-                                removeFromCart(index);
-                            }}
-                        >
-                            <BiTrash />
-                        </button>
                     </div>
-                );
-            })}
+
+                    <div className="pt-2">
+                        <button
+                            onClick={placeOrder}
+                            className="w-full md:w-auto bg-third text-white rounded-[6px] px-6 py-3 text-sm font-semibold tracking-wide
+     transition duration-500 ease-in-out hover:shadow-[0_0_15px_1px_rgba(218,12,129,0.7)] active:shadow-[0_0_15px_10px_rgba(218,12,129,0.7)]"
+                        >
+                            PLACE ORDER
+                        </button>
+
+                    </div>
+                </section>
+
+                {/* RIGHT: order summary */}
+                <aside className="lg:col-span-4 lg:pl-8 lg:border-l">
+                    <div className="sticky top-20">
+                        <div className="mb-4 flex items-center justify-between">
+                            <h2 className="text-lg font-medium tracking-wide">
+                                Your order
+                            </h2>
+                            <Link
+                                to="/cart"
+                                className="relative inline-block text-sm text-gray-600 hover:text-gray-800 group"
+                            >
+                                Edit cart
+                                <span className="absolute left-0 -bottom-0.5 h-0.5 w-0 bg-gray-800 transition-all duration-300 group-hover:w-full"></span>
+                            </Link>
+
+                        </div>
+
+                        <div className="space-y-4">
+                            {cart.map((item, index) => (
+                                <div
+                                    key={item.productId}
+                                    className="flex items-center gap-4 border-b pb-4"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="h-16 w-16 rounded object-cover bg-gray-50 border"
+                                    />
+                                    <div className="min-w-0 flex-1">
+                                        <p className="truncate text-sm font-medium">{item.name}</p>
+                                        <p className="text-xs text-gray-500 truncate">
+                                            {item.productId}
+                                        </p>
+
+                                        {/* qty controls */}
+                                        <div className="mt-2 inline-flex items-center gap-2">
+                                            <button
+                                                onClick={() => changeQty(index, -1)}
+                                                className="h-7 w-7 grid place-items-center rounded border hover:bg-third active:bg-third"
+                                            >
+                                                <BiMinus />
+                                            </button>
+                                            <span className="w-5 text-center text-sm">
+                        {item.qty}
+                      </span>
+                                            <button
+                                                onClick={() => changeQty(index, 1)}
+                                                className="h-7 w-7 grid place-items-center rounded border hover:bg-third active:bg-third"
+                                            >
+                                                <BiPlus />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div className="text-right">
+                                        <button
+                                            onClick={() => removeLine(index)}
+                                            className="mb-1 block text-gray-400 hover:text-red-500"
+                                            title="Remove"
+                                        >
+                                            <BiTrash />
+                                        </button>
+                                        <div className="text-sm font-semibold">
+                                            ${(item.price * item.qty).toFixed(2)}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* totals */}
+                        <div className="mt-6 space-y-3 text-sm">
+                            <Row label="Subtotal" value={`LKR ${subtotal.toFixed(2)}`} />
+                            <div className="border-t pt-3 flex items-center justify-between text-base">
+                                <span className="font-medium">Total</span>
+                                <span className="font-semibold">
+                  LKR {subtotal.toFixed(2)}
+                </span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    );
+}
+
+/* helpers */
+function Field({ label, value, onChange, type = "text" }) {
+    return (
+        <label className="block">
+            <div className="mb-1 text-sm text-gray-600">{label}</div>
+            <input
+                type={type}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="w-full rounded border px-3 py-2 text-sm outline-black border-third active:border-black "
+            />
+        </label>
+    );
+}
+function Row({ label, value }) {
+    return (
+        <div className="flex items-center justify-between">
+            <span className="text-gray-600">{label}</span>
+            <span className="font-medium">{value}</span>
         </div>
     );
 }
