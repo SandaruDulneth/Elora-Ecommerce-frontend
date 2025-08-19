@@ -56,7 +56,7 @@ export default function EditProductPage() {
                 price : price,
                 stock : stock,
             }
-            axios.put( "http://localhost:5000/api/products/"+productId, product , {//in here we send the product
+            axios.put( import.meta.env.VITE_BACKEND_URL+"/api/products/"+productId, product , {//in here we send the product
                 // id like this to edit the product to backend
                 headers : {
                     "Authorization" : "Bearer "+token

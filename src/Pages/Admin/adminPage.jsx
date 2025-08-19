@@ -23,7 +23,7 @@ export default function AdminPage() {
             window.location.href = "/login";
         } else {
             axios
-                .get("http://localhost:5000/api/users/", {
+                .get(import.meta.env.VITE_BACKEND_URL+"/api/users/", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

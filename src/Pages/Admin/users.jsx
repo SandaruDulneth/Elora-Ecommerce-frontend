@@ -39,7 +39,7 @@ export default function AdminUsersPage() {
         if (!token) return toast.error("Please login first");
 
         axios
-            .delete(`http://localhost:5000/api/users/${userId}`, {
+            .delete(import.meta.env.VITE_BACKEND_URL+`/api/users/${userId}`, {
                 headers: { Authorization: "Bearer " + token },
             })
             .then(() => {

@@ -33,7 +33,7 @@ export default function Reviews() {
 
     const load = async () => {
         try {
-            const { data } = await axios.get("http://localhost:5000/api/reviews");
+            const { data } = await axios.get(import.meta.env.VITE_BACKEND_URL+"/api/reviews");
             setSummary({ average: data.average || 0, count: data.count || 0 });
             setReviews(data.reviews || []);
         } catch (e) {
@@ -58,7 +58,7 @@ export default function Reviews() {
 
         try {
             await axios.post(
-                "http://localhost:5000/api/reviews",
+                import.meta.env.VITE_BACKEND_URL+"/api/reviews",
                 {
                     rating: Number(form.rating),
                     comment: form.comment,
