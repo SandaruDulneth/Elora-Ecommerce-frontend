@@ -1,7 +1,5 @@
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/footer.jsx";
-import ImageSlider from "../../components/ImageSlider";
 import BgSlider from "../../components/bgSlider.jsx"; // Import the ImageSlider
 
 export default function ActualHomePage() {
