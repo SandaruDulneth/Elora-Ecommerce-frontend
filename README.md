@@ -65,3 +65,5 @@ EMAIL_USER
 EMAIL_PASS 
 VITE_BACKEND_URL 
 ```
+### License
+MIT License
