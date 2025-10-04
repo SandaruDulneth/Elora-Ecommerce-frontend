@@ -9,7 +9,7 @@ export default function Footer() {
                 <div>
                     <h2 className="text-2xl font-medium text-third">Elora</h2>
                     <p className="mt-3 text-sm text-white">
-                        123 Bloom Avenue, Rosewood, CA 90210 <br />
+                        123 Bloom Avenue, colombo 3, sri lanka <br />
                         Mon–Fri: 9am – 5pm PST
                     </p>
                     <p className="mt-3 text-sm font-semibold text-white">Contact:</p>
@@ -74,7 +74,7 @@ export default function Footer() {
 
             {/* Bottom copyright */}
             <div className="mt-10 border-t border-third/40 pt-5 text-center text-xs text-gray-600 mb-2">
-                © 2023 Nura Beauty. All rights reserved
+                © 2025 Elora Beauty. All rights reserved
             </div>
         </footer>
     );
