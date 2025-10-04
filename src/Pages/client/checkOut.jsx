@@ -171,7 +171,7 @@ export default function CheckoutPage() {
                                             <BiTrash />
                                         </button>
                                         <div className="text-sm font-semibold">
-                                            ${(item.price * item.qty).toFixed(2)}
+                                            {(item.price * item.qty).toFixed(2)}
                                         </div>
                                     </div>
                                 </div>
