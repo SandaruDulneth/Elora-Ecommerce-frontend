@@ -3,7 +3,7 @@
 Elora is a modern e-commerce platform designed for selling cosmetic products. It is built with React and styled using Tailwind CSS to provide a responsive and intuitive shopping experience.
 
 <br>
-Backend Repo - ``` https://github.com/SandaruDulneth/Elora-Ecommerce-backend ```
+Backend Repo -  https://github.com/SandaruDulneth/Elora-Ecommerce-backend 
 
 ## Features
 
